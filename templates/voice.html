@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/recorder.css' %}" />
+{% endblock style %}
+
+
+{% block content %}
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+     
+  <h2 id='modal-sentence'>{{ sentence }}</h2>
+    <h3>Choose the error type</h3>
+  
+  <ul>
+    {% for comment in comments %}
+    <li>
+      <input type="radio" id="{{ comment.0 }}" name="selector">
+      <label for="{{ comment.0 }}">{{ comment.1 }}</label>
+      
+      <div class="check"></div>
+    </li>
+    
+    {% endfor %}
+  
+  
+</ul>
+<button id="error_btn_submit" class='sentence-error-btn'>Submit</button>
+    </div>
+  
+  </div>
+
+
+
+<div class="card form-control">
+    <br>
+        <div class="card-content">
+            <h2 id='sentence'>{{ sentence }}</h2>
+            <input type="hidden" id='sentence_id' value="{{ sentence.id }}">
+            
+        </div>
+<hr>
+<br>
+    <div style="padding: 50px 0 row">
+        <button id="myBtn"  class='next_button'>Xatolik bormi?</button>
+        <audio id="recorder" muted hidden></audio>
+
+        <button class='button' onmousedown="mouseclick.play()" id="startStopBtn" style="margin: 20px 20px;" >Record</button>
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <button class="next_button" id='nextSentenceBtn' style="vertical-align:middle"><span>Next Sentence </span></button>
+        <div id="recordholder"></div>
+    </div>
+     <div>
+        <audio id="player" controls></audio>
+    </div> 
+
+    
+</div>
+
+{% endblock content %}
+
+
+
+{% block script %}
+<script src="{% static 'js/recorder_app.js' %}" ></script>
+<script src="{% static 'js/sentence_next.js' %}" async defer ></script>
+<script src="{% static 'js/sentence_error.js' %}" async defer ></script>
+<script src="{% static 'js/recorder_animation.js' %}" async defer></script>
+{% endblock script %}

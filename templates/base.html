@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}
+    {% endblock style %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {% comment %} <link href="https://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/css/demo.css"> {% endcomment %}
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class='navbar'>
+        {% comment %} <a href="{% url 'voice:home' %}">Home</a>
+        <a href="{% url 'voice:voice' %}">Record Voice</a> {% endcomment %}
+    </div >
+    {% block content %}
+    {% endblock content %}
+   
+
+    {% block script %}
+    {% endblock script %}
+
+   
+    
+    
+</body>
+</html>
+
+
