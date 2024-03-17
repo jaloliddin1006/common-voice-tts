@@ -29,31 +29,33 @@ function startRecording() {
         });
 }
 
-function stopRecording() {
-    mediaRecorder.addEventListener('stop', (stream) => {
-        if (audioChunks.length === 0) {
-            console.error('Audio fayl bo\'shligi sababli to\'xtadi!');
-            return;
-        }
-        const audioBlob = new Blob(audioChunks, { 'type': 'audio/wav; codecs=opus' });
-        sendAudioToServer(audioBlob);
-        audioChunks = [];
-    });
 
-    if (mediaRecorder.state !== 'inactive') {
+function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.addEventListener('stop', () => {
+            if (audioChunks.length === 0) {
+                console.error('Audio fayl bo\'shligi sababli to\'xtadi!');
+                return;
+            }
+            const audioBlob = new Blob(audioChunks, { 'type': 'audio/wav' }); // Mime tipini tekshirib oling
+            sendAudioToServer(audioBlob);
+            audioChunks = [];
+        });
+
         mediaRecorder.stop();
     }
-
-    mediaRecorder.stop();
-    
 }
+
 
 function sendAudioToServer(blob) {
     const formData = new FormData();
     formData.append('sentence_id', sentence_id.value);
-    formData.append('sentence', sentence.innerHTML);
+    formData.append('sentence', sentence.textContent);
     formData.append('audio_file', blob, 'recorded_audio.wav');
-
+    console.log(sentence.textContent);
+    console.log(sentence_id.value);
+    console.log(blob);     
+     console.log(formData);
     fetch('/save-voice/', {
         method: 'POST',
         headers: {
@@ -64,10 +66,12 @@ function sendAudioToServer(blob) {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        sentence.innerHTML = data.sentence;
+        sentence.textContent = data.sentence;
         sentence_id.value = data.sentence_id;
     })
     .catch(error => {
+console.log(response);
         console.error(error);
     });
 }
+

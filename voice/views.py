@@ -93,7 +93,7 @@ class SaveVoiceView(APIView):
                 'sentence_id': f"{sentence.id}"
             }
             return Response(data, status=status.HTTP_201_CREATED)
-        # print(serializer.errors)
+        print(serializer.errors)
         context = {
             'status': False,
             "error": serializer.errors,
