@@ -11,9 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cm1al5ey2k)ztx61y@me615l3asis955@ttam&&t2n+*pu@lu_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['tts.mamatmusayev.uz', 'onlinelibrary.uz', '127.0.0.1']
 
 
 # Application definition
@@ -117,8 +117,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'#Location of static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]  ## on server
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')  ## on local
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]  ## on local
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  ## on server
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
