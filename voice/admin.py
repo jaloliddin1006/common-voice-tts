@@ -21,7 +21,7 @@ class VoiceAdmin(admin.ModelAdmin):
         # list_display = ['audio_tag']
 
     def audio_tag(self, obj):
-        return format_html('<audio controls src="{}"></audio>', obj.audio.url)
+        return format_html('<audio controls src="{}"></audio>', obj.file.url)
 
     audio_tag.short_description = 'Audio'
 
