@@ -86,7 +86,7 @@ class VoiceRecorder {
 	
 		const formData = new FormData();
 		const blob = new Blob(this.chunks, { 'type': 'audio/wav; codecs=opus' });
-		formData.append('audio', blob, 'recording.wav');
+		formData.append('audio_file', blob, 'recording.wav');
 		formData.append('sentence', this.sentence.value);
 		formData.append('sentence_id', this.sentence_id.value);
 

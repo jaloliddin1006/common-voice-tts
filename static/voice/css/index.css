@@ -1,8 +1,10 @@
-.main {
+/* .main {
   background: #22232e;
 
-}
-
+} */
+.header {
+margin: 100px;
+} 
 .wrap {
   height: 100%;
   display: flex;

@@ -1,8 +1,8 @@
 const next_sentence_btn = document.querySelector("#nextSentenceBtn");
-const sentence = document.querySelector("#sentence");
+// const sentence = document.querySelector("#sentence");
 const sentence_modal = document.querySelector("#modal-sentence");
-const sentence_id = document.querySelector("#sentence_id");
-const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+// const sentence_id = document.querySelector("#sentence_id");
+// const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
 next_sentence_btn.onclick = () => {
 

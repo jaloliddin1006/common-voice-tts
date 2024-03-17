@@ -3,7 +3,7 @@
 
 {% block style %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/recorder.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'voice/css/recorder.css' %}" />
 {% endblock style %}
 
 
@@ -52,14 +52,14 @@
         <button id="myBtn"  class='next_button'>Xatolik bormi?</button>
         <audio id="recorder" muted hidden></audio>
 
-        <button class='button' onmousedown="mouseclick.play()" id="startStopBtn" style="margin: 20px 20px;" >Record</button>
+        <button class='button' onmousedown="mouseclick.play()" id="startStopBtn" style="margin: 20px 20px;" >Start</button>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <button class="next_button" id='nextSentenceBtn' style="vertical-align:middle"><span>Next Sentence </span></button>
         <div id="recordholder"></div>
     </div>
-     <div>
+     {% comment %} <div>
         <audio id="player" controls></audio>
-    </div> 
+    </div>  {% endcomment %}
 
     
 </div>
@@ -69,8 +69,10 @@
 
 
 {% block script %}
-<script src="{% static 'js/recorder_app.js' %}" ></script>
-<script src="{% static 'js/sentence_next.js' %}" async defer ></script>
-<script src="{% static 'js/sentence_error.js' %}" async defer ></script>
-<script src="{% static 'js/recorder_animation.js' %}" async defer></script>
+<script src="{% static 'voice/js/recorder_app_alone.js' %}" ></script>
+<script src="{% static 'voice/js/sentence_next.js' %}" ></script>
+<script src="{% static 'voice/js/sentence_error.js' %}" async defer ></script>
+<script src="{% static 'voice/js/recorder_animation.js' %}" async defer></script>
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
 {% endblock script %}
