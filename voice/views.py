@@ -71,18 +71,18 @@ class SaveVoiceView(APIView):
             
             file_name = f"voices/{voice.id}_{request.user.username}.wav"
             
-            with open('media/'+file_name, 'wb') as f:
+            with open('media/'+file_name, 'wb+') as f:
                 for chunk in audio_file.chunks():
                     f.write(chunk)
             voice.file = file_name
             voice.save()
-                    
+                   
             # voice.sentence.is_read = True
             # voice.sentence.save()
             
             group_id = SavedVoiceGroupId.objects.filter(user=request.user).first().group
             
-            send_audio('media/'+file_name, voice.sentence.body, voice.sentence.id, group_id=group_id)
+            send_audio(voice.file.url, voice.sentence.body, voice.sentence.id, group_id=group_id)
                     
 
             sentence = Sentence.objects.all().filter(is_read=False).order_by('?').first()
