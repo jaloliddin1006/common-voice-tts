@@ -10,12 +10,22 @@ const startStopBtn = document.querySelector("#startStopBtn");
 startStopBtn.addEventListener('click', function() {
     isRecording = !isRecording;
     if (isRecording) {
+   
         startRecording();
         startStopBtn.innerHTML = 'Stop';
     } else {
+             
+        showLoader();
+        hideContent();
+
         stopRecording();
         startStopBtn.innerHTML = 'Start';
-    }
+            
+        }
+    
+        showContent();
+        hideLoader();
+   
 });
 
 function startRecording() {
@@ -26,6 +36,9 @@ function startRecording() {
                 audioChunks.push(event.data);
             });
             mediaRecorder.start();
+        })
+        .catch(error => {
+            console.error('Audio yozish uchun xatolik:', error);
         });
 }
 
@@ -52,10 +65,10 @@ function sendAudioToServer(blob) {
     formData.append('sentence_id', sentence_id.value);
     formData.append('sentence', sentence.textContent);
     formData.append('audio_file', blob, 'recorded_audio.wav');
-    console.log(sentence.textContent);
-    console.log(sentence_id.value);
-    console.log(blob);     
-     console.log(formData);
+    // console.log(sentence.textContent);
+    // console.log(sentence_id.value);
+    // console.log(blob);     
+    //  console.log(formData);
     fetch('/save-voice/', {
         method: 'POST',
         headers: {
@@ -63,15 +76,27 @@ function sendAudioToServer(blob) {
         },
         body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        sentence.textContent = data.sentence;
-        sentence_id.value = data.sentence_id;
+    .then(response => {
+        if (response.ok) {
+            response.json().then(data => {
+                sentence.textContent = data.sentence;
+                sentence_modal.textContent = data.sentence;
+                sentence_id.value = data.sentence_id;
+            });
+        } else if (response.status === 401) {
+            console.error("Tizimga kirishni tekshiring");
+            alert("Tizimga kirishni tekshiring");
+            response.json().then(data => {
+                window.open(data.url, "_self");
+            });
+        }
+        else {
+            console.error("Next sentence error......");
+            alert("Tizimga kirishni tekshiring");
+            // window.open(response.json().url, "_self");
+        }
     })
     .catch(error => {
-console.log(response);
-        console.error(error);
+        console.error("Next sentence error::::", error);
     });
 }
-

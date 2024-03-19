@@ -3,12 +3,10 @@ from django.conf import settings
 BASE_DIR = settings.BASE_DIR
 
 # Audio faylini yuborish
-def send_audio(audio_path=None, caption='', id=None, group_id=1):
+def send_audio(audio_path=None, caption='', id=None, group_id=2):
     # Bot API tokenini yozing
     TOKEN = "6463249109:AAESqnRtpa1TBMNS1fON3HYzDvfXO3-Z6sQ"
-    print(BASE_DIR)
-    print(audio_path)
-    # Chat ID ni yozing
+
     CHAT_ID = "-1002115614399"
 
     url = f"https://api.telegram.org/bot{TOKEN}/sendAudio"

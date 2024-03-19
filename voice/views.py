@@ -53,7 +53,7 @@ class SaveVoiceView(APIView):
     
     def post(self, request):
         if not request.user.is_authenticated:
-            return Response({'status': False,
+            return Response({'status': 'unauthorized',
                             "error": "Siz tizimga kirish qilmagansiz",
                              'url': '/accounts/login/'
                              

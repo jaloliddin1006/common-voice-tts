@@ -4,10 +4,15 @@
 {% block style %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'voice/css/recorder.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'voice/css/loader.css' %}" />
 {% endblock style %}
 
 
 {% block content %}
+
+{% include "loader.html" %}
+
+<div id='content' class='hidden'>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -62,6 +67,7 @@
     </div>  {% endcomment %}
 
     
+</div>
 </div>
 
 {% endblock content %}
